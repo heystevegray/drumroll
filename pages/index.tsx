@@ -1,6 +1,6 @@
 import { Button, Container, Grid, Typography, Box, AppBar, Toolbar } from '@mui/material';
 import Head from 'next/head';
-import { Howl, Howler, HowlerOptions } from 'howler';
+import { Howl, Howler } from 'howler';
 import { useState } from 'react';
 import Image from 'next/image';
 
@@ -15,7 +15,7 @@ export default function Home() {
     const [isRolling, setIsRolling] = useState(false);
     const [emoji, setEmoji] = useState(defaultEmoji);
     const [volume] = useState(0.5);
-    const config: HowlerOptions = {
+    const config = {
         volume,
     };
 
