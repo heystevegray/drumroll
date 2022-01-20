@@ -61,7 +61,7 @@ export default function Home() {
         <>
             <Head>
                 <title>drumroll</title>
-                <meta name="description" content="When you need a quick drum roll 🥁" />
+                <meta name="description" content="When you need a drumroll on demand 🥁" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <AppBar position="static">
