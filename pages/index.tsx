@@ -1,6 +1,6 @@
 import { Button, Container, Grid, Typography, Box, AppBar, Toolbar } from '@mui/material';
 import Head from 'next/head';
-import { Howl, Howler } from 'howler';
+import { Howl, Howler, HowlerOptions } from 'howler';
 import { useState } from 'react';
 import Image from 'next/image';
 
@@ -15,10 +15,13 @@ export default function Home() {
     const [isRolling, setIsRolling] = useState(false);
     const [emoji, setEmoji] = useState(defaultEmoji);
     const [volume] = useState(0.5);
+    const config: HowlerOptions = {
+        volume,
+    };
 
     const startSound = new Howl({
         src: [drumStart],
-        volume,
+        ...config,
         onend: function () {
             console.log('Finished start sound!');
             loopSound.play();
@@ -27,19 +30,13 @@ export default function Home() {
 
     const endSound = new Howl({
         src: [drumEnd],
-        volume,
-        onend: function () {
-            console.log('Finished end sound!');
-        },
+        ...config,
     });
 
     const loopSound = new Howl({
         src: [drumLoop],
         loop: true,
-        volume,
-        onplay: function () {
-            console.log('Started loop sound!');
-        },
+        ...config,
     });
 
     const playAudio = () => {
