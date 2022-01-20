@@ -1,4 +1,4 @@
-import { Button, Container, Grid, Typography } from '@mui/material';
+import { Button, Container, Grid, Typography, Box } from '@mui/material';
 import Head from 'next/head';
 import { Howl } from 'howler';
 
@@ -25,13 +25,13 @@ export default function Home() {
     };
 
     return (
-        <div>
-            <Head>
-                <title>Virturoll</title>
-                <meta name="description" content="Virtual drum roll" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <Container maxWidth="xs" sx={{ p: 4 }}>
+        <Container maxWidth="xs" sx={{ p: 4 }}>
+            <Box display="flex" height="100vh" alignItems="center">
+                <Head>
+                    <title>Virturoll</title>
+                    <meta name="description" content="Virtual drum roll" />
+                    <link rel="icon" href="/favicon.ico" />
+                </Head>
                 <Grid container alignItems="center" justifyContent="center">
                     <Grid item xs={12}>
                         <Typography textAlign="center">Drumroll</Typography>
@@ -47,7 +47,7 @@ export default function Home() {
                         </Button>
                     </Grid>
                 </Grid>
-            </Container>
-        </div>
+            </Box>
+        </Container>
     );
 }
