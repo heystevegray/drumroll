@@ -12,7 +12,7 @@ const spacing = 4
 
 export default function Home() {
     const [isRolling, setIsRolling] = useState(false);
-    const [volume, setVolume] = useState(0.5);
+    const [volume] = useState(0.5);
 
     const startSound = new Howl({
         src: [drumStart],
