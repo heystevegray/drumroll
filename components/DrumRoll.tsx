@@ -54,7 +54,7 @@ const DrumRoll = () => {
     };
     return (
         <Container maxWidth="xs" sx={{ p: 4 }}>
-            <Box display="flex" height="100vh" sx={{ paddingTop: 8 }} alignItems="flex-start">
+            <Box display="flex" sx={{ paddingTop: 8 }} alignItems="flex-start">
                 <Grid container alignItems="center" justifyContent="center" spacing={spacing}>
                     <Grid item xs={12}>
                         <Typography textAlign="center" fontSize={fontSize}>
