@@ -1,4 +1,4 @@
-import GitHubIcon from '@mui/icons-material/GitHub';
+import { GitHub } from '@mui/icons-material';
 import { AppBar as MuiAppBar, Toolbar, Typography, Tooltip, IconButton } from '@mui/material';
 
 const AppBar = () => {
@@ -10,7 +10,7 @@ const AppBar = () => {
                 </Typography>
                 <Tooltip title="Source Code">
                     <IconButton target="_blank" href="https://github.com/heystevegray/drumroll">
-                        <GitHubIcon />
+                        <GitHub />
                     </IconButton>
                 </Tooltip>
             </Toolbar>
