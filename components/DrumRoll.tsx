@@ -1,6 +1,6 @@
 import { Container, Box, Grid, Typography, Button } from '@mui/material';
 import { Howl, Howler } from 'howler';
-import { useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Image from 'next/image';
 
 const drumStart = 'drumroll-start.wav';
@@ -13,6 +13,7 @@ const defaultEmoji = `😐`;
 const DrumRoll = () => {
     const [isRolling, setIsRolling] = useState(false);
     const [emoji, setEmoji] = useState(defaultEmoji);
+    const [flip, setFlip] = useState(false);
     const [volume] = useState(0.5);
     const config = {
         volume,
@@ -22,7 +23,6 @@ const DrumRoll = () => {
         src: [drumStart],
         ...config,
         onend: function () {
-            console.log('Finished start sound!');
             loopSound.play();
         },
     });
@@ -50,14 +50,38 @@ const DrumRoll = () => {
         Howler.stop();
         endSound.play();
         endSound.fade(0.25, volume, 250);
-        setTimeout(() => setEmoji(defaultEmoji), 1500);
+        setTimeout(() => {
+            setEmoji(defaultEmoji);
+        }, 2000);
     };
+
+    const handleFlip = useCallback(() => {
+        if (isRolling) {
+            setFlip(!flip);
+        }
+    }, [flip, isRolling]);
+
+    useEffect(() => {
+        const timerId = setInterval(handleFlip, 1500);
+        if (!isRolling) {
+            clearInterval(timerId);
+        }
+        return () => clearInterval(timerId);
+    }, [isRolling, handleFlip]);
+
     return (
         <Container maxWidth="xs" sx={{ p: 4 }}>
             <Box display="flex" sx={{ paddingTop: 8 }} alignItems="flex-start">
                 <Grid container alignItems="center" justifyContent="center" spacing={spacing}>
                     <Grid item xs={12}>
-                        <Typography variant="h2" textAlign="center" fontSize={fontSize}>
+                        <Typography
+                            sx={{
+                                transform: `scale(${flip ? -1 : 1}, 1)`,
+                            }}
+                            variant="h2"
+                            textAlign="center"
+                            fontSize={fontSize}
+                        >
                             {emoji}
                         </Typography>
                     </Grid>
