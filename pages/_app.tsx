@@ -15,6 +15,21 @@ const App = ({ Component, pageProps }: AppProps) => {
         }
     }, []);
 
+    useEffect(() => {
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('/service-worker.js').then(
+                    function (registration) {
+                        console.log('Service Worker registration successful with scope: ', registration.scope);
+                    },
+                    function (err) {
+                        console.log('Service Worker registration failed: ', err);
+                    }
+                );
+            });
+        }
+    }, []);
+
     return (
         <StyledEngineProvider injectFirst>
             <ThemeProvider theme={theme}>
