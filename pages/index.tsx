@@ -16,17 +16,19 @@ export default function Home() {
     const totalAppBarHeight = matches ? 112 : 128;
 
     return (
-        <Box sx={{ height: `calc(100vh - ${totalAppBarHeight}px)` }}>
+        <>
             <Head>
                 <title>drumroll</title>
                 <meta name="description" content="When you need a drumroll on demand 🥁" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <AppBar />
-            <Box sx={{ height: '100%' }}>
-                <DrumRoll />
+            <Box sx={{ height: `calc(100vh - ${totalAppBarHeight}px)` }}>
+                <AppBar />
+                <Box sx={{ height: '100%' }}>
+                    <DrumRoll />
+                </Box>
+                <Footer />
             </Box>
-            <Footer />
-        </Box>
+        </>
     );
 }
