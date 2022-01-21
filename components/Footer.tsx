@@ -4,12 +4,7 @@ const Footer = () => {
     return (
         <AppBar position="static" color="transparent">
             <Toolbar>
-                <Grid
-                    container
-                    justifyContent="center"
-                    alignItems="center"
-                    
-                >
+                <Grid container justifyContent="center" alignItems="center">
                     <Typography>
                         Created by{' '}
                         <Link color="secondary" target="_blank" href="https://heystevegray.dev/">

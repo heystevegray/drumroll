@@ -57,7 +57,7 @@ const DrumRoll = () => {
             <Box display="flex" sx={{ paddingTop: 8 }} alignItems="flex-start">
                 <Grid container alignItems="center" justifyContent="center" spacing={spacing}>
                     <Grid item xs={12}>
-                        <Typography variant='h2' textAlign="center" fontSize={fontSize}>
+                        <Typography variant="h2" textAlign="center" fontSize={fontSize}>
                             {emoji}
                         </Typography>
                     </Grid>
