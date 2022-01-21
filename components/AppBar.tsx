@@ -5,7 +5,7 @@ const AppBar = () => {
     return (
         <MuiAppBar position="static">
             <Toolbar>
-                <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: 'flex' } }}>
+                <Typography variant="h6" noWrap component="h1" sx={{ flexGrow: 1, display: { xs: 'flex' } }}>
                     drumroll
                 </Typography>
                 <Tooltip title="Source Code">

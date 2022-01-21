@@ -12,7 +12,7 @@ const Footer = () => {
                 >
                     <Typography>
                         Created by{' '}
-                        <Link target="_blank" href="https://heystevegray.dev/">
+                        <Link color="secondary" target="_blank" href="https://heystevegray.dev/">
                             Steve Gray
                         </Link>{' '}
                     </Typography>
