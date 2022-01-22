@@ -2,14 +2,14 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import useCustomLocalStorage from 'lib/hooks/useLocalStorage';
 import { AppContext } from 'providers/App';
-import { useContext } from 'react';
+import { useContext, MouseEvent } from 'react';
 
 interface Duration {
     value: number;
     label: string;
 }
 
-const durations = [
+const durations: Duration[] = [
     {
         value: 3,
         label: '3 seconds',
@@ -32,7 +32,7 @@ export default function ToggleButtons() {
     const { duration, setDuration } = useContext(AppContext);
     const { localStorageValue, setCustomStorage } = useCustomLocalStorage();
 
-    const handleAlignment = (event, newAlignment) => {
+    const handleAlignment = (_event: MouseEvent<HTMLElement>, newAlignment: number) => {
         setDuration(newAlignment);
         setCustomStorage({ duration: newAlignment });
     };

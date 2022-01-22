@@ -16,13 +16,7 @@ const Settings = ({ open, setOpen }: Props) => {
 
     return (
         <Drawer elevation={2} anchor="right" open={open} onClose={handleClose}>
-            <Container
-                maxWidth="xs"
-                sx={(theme) => ({
-                    p: 2,
-                    height: '100%',
-                })}
-            >
+            <Container maxWidth="xs" sx={{ p: 2, height: '100%' }}>
                 <Grid container spacing={2}>
                     <Grid container item xs={12}>
                         <Grid item xs>

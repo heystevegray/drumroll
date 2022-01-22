@@ -1,4 +1,4 @@
-import { Paper, Link, Grid, Typography, Button } from '@mui/material';
+import { Paper, Link, Grid, Typography } from '@mui/material';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
@@ -69,11 +69,11 @@ const Gif = ({ show }: Props) => {
         setSelectedGif(gifs[Math.floor(Math.random() * (max - min + 1)) + min]);
     };
 
-    // useEffect(() => {
-    //     if (!show) {
-    //         shuffleGifs();
-    //     }
-    // }, [show]);
+    useEffect(() => {
+        if (!show) {
+            shuffleGifs();
+        }
+    }, [show]);
 
     return (
         <Grid container>

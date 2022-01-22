@@ -1,14 +1,14 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
 
 interface AppProps {
-    duration: number;
-    setDuration: Dispatch<SetStateAction<number>>;
+    duration: number | undefined;
+    setDuration: Dispatch<SetStateAction<number | undefined>>;
     openSettings: boolean;
     setOpenSettings: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface UserSettings {
-    duration: number;
+    duration?: number;
 }
 
 export const initialUserSettingsState: UserSettings = {
@@ -16,7 +16,7 @@ export const initialUserSettingsState: UserSettings = {
 };
 
 export const initialState: AppProps = {
-    duration: initialUserSettingsState.duration,
+    duration: initialUserSettingsState.duration || -1,
     setDuration: () => {},
     openSettings: false,
     setOpenSettings: () => {},
