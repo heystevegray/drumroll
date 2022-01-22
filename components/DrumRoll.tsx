@@ -1,7 +1,8 @@
+import { PlayArrow, Stop } from '@mui/icons-material';
 import { Container, Box, Grid, Typography, Button } from '@mui/material';
 import { Howl, Howler } from 'howler';
 import { useEffect, useState, useCallback } from 'react';
-import Image from 'next/image';
+import Gif from './Gif';
 
 const drumStart = 'drumroll-start.wav';
 const drumLoop = 'drumroll-loop.wav';
@@ -86,22 +87,28 @@ const DrumRoll = () => {
                         </Typography>
                     </Grid>
                     <Grid container item xs={12} alignItems="center" justifyContent="center">
-                        <Image
-                            width={100}
-                            height={100}
-                            layout="fixed"
-                            src="/android-chrome-192x192.png"
-                            alt="drum with drum sticks"
-                        />
+                        <Gif show={isRolling} />
                     </Grid>
                     <Grid container item xs={12} spacing={2}>
                         <Grid container item xs={6} justifyContent="center">
-                            <Button disabled={isRolling} fullWidth variant="contained" onClick={playAudio}>
+                            <Button
+                                disabled={isRolling}
+                                fullWidth
+                                variant="contained"
+                                onClick={playAudio}
+                                startIcon={<PlayArrow />}
+                            >
                                 Play
                             </Button>
                         </Grid>
                         <Grid container item xs={6} justifyContent="center">
-                            <Button disabled={!isRolling} fullWidth variant="contained" onClick={stopAudio}>
+                            <Button
+                                disabled={!isRolling}
+                                fullWidth
+                                variant="contained"
+                                onClick={stopAudio}
+                                startIcon={<Stop />}
+                            >
                                 Stop
                             </Button>
                         </Grid>
