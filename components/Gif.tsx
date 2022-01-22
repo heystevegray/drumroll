@@ -90,12 +90,12 @@ const Gif = ({ show }: Props) => {
                 {show ? (
                     <Image alt={alt} layout="intrinsic" src={source} width={width} height={height} />
                 ) : (
-                    <Paper square sx={{ width, height }} />
+                    <Paper elevation={0} square sx={{ width, height }} />
                 )}
             </Grid>
             <Grid item xs={12} sx={{ paddingRight: 2, p: 2 }}>
                 {show ? (
-                    <Grid container justifyContent="flex-end">
+                    <Grid container justifyContent="center">
                         <Link color="secondary" href={credit} target="_blank">
                             {alt} Source
                         </Link>

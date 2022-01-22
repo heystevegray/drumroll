@@ -7,7 +7,7 @@ const AppBar = () => {
     const [openSettings, setOpenSettings] = useState(false);
 
     return (
-        <MuiAppBar position="static">
+        <MuiAppBar position="static" elevation={0}>
             <Toolbar>
                 <Grid container spacing={2} alignItems="center">
                     <Grid item xs sx={{ flexGrow: 1 }}>
