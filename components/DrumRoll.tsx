@@ -71,9 +71,9 @@ const DrumRoll = () => {
     }, [isRolling, handleFlip]);
 
     return (
-        <Container maxWidth="xs" sx={{ p: 4 }}>
-            <Box display="flex" sx={{ paddingTop: 8 }} alignItems="flex-start">
-                <Grid container alignItems="center" justifyContent="center" spacing={spacing}>
+        <Container maxWidth="xs" sx={{ p: 4, height: '100%' }}>
+            <Box display="flex" sx={{ paddingTop: 8, height: '100%' }} alignItems="flex">
+                <Grid container justifyContent="center" spacing={spacing} sx={{ flexGrow: 1 }}>
                     <Grid item xs={12}>
                         <Typography
                             sx={{
@@ -86,10 +86,10 @@ const DrumRoll = () => {
                             {emoji}
                         </Typography>
                     </Grid>
-                    <Grid container item xs={12} alignItems="center" justifyContent="center">
+                    <Grid container item xs={12} alignItems="center" justifyContent="center" sx={{ flexGrow: 1 }}>
                         <Gif show={isRolling} />
                     </Grid>
-                    <Grid container item xs={12} spacing={2}>
+                    <Grid container item xs={12} spacing={2} alignItems="flex-end">
                         <Grid container item xs={6} justifyContent="center">
                             <Button
                                 disabled={isRolling}
@@ -114,6 +114,7 @@ const DrumRoll = () => {
                         </Grid>
                     </Grid>
                 </Grid>
+
             </Box>
         </Container>
     );

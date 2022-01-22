@@ -1,4 +1,4 @@
-import { Paper, Link, Grid, Typography } from '@mui/material';
+import { Paper, Link, Grid, Typography, Button } from '@mui/material';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
@@ -20,28 +20,42 @@ const gifs: GifProps[] = [
         source: 'https://media.giphy.com/media/ogGmxeqA8L3sA/giphy.gif',
         width: 380,
         height: 204,
-        alt: 'drum roll Please GIF',
+        alt: 'Please GIF',
     },
     {
         credit: 'https://giphy.com/gifs/feeder-ItItdif4XcSiSNw9Zh',
         source: 'https://media.giphy.com/media/ItItdif4XcSiSNw9Zh/giphy.gif',
         width: 394,
         height: 394,
-        alt: 'drum roll Cat Dog GIF By Feeder',
+        alt: 'Cat Dog GIF By Feeder',
     },
     {
         credit: 'https://giphy.com/gifs/GBvkxysAR8Svm',
         source: 'https://media.giphy.com/media/GBvkxysAR8Svm/giphy.gif',
         width: 394,
         height: 222,
-        alt: 'drum roll Micheal from the Office GIF',
+        alt: 'The Office Drum GIF',
     },
     {
         credit: 'https://giphy.com/gifs/zdfmagazinroyale-XRQn2ueP2wtbdWp2gt',
         source: 'https://media.giphy.com/media/XRQn2ueP2wtbdWp2gt/giphy.gif',
         width: 394,
         height: 394,
-        alt: 'drum roll Fun Reaction GIF By ZDF Magazin Royale',
+        alt: 'Fun Reaction GIF By ZDF Magazin Royale',
+    },
+    {
+        credit: 'https://giphy.com/gifs/Concertgebouw-drum-drumroll-concertgebouw-srZc9418DEY41rNe5K',
+        source: 'https://media.giphy.com/media/srZc9418DEY41rNe5K/giphy.gif',
+        width: 392,
+        height: 392,
+        alt: 'Drums GIF By Het Concertgebouw',
+    },
+    {
+        credit: 'https://giphy.com/gifs/suspense-XujzWKelSd5S',
+        source: 'https://media.giphy.com/media/XujzWKelSd5S/giphy.gif',
+        width: 392,
+        height: 206,
+        alt: 'Suspense GIF',
     },
 ];
 
@@ -49,9 +63,17 @@ const Gif = ({ show }: Props) => {
     const [selectedGif, setSelectedGif] = useState(gifs[0]);
     const { source, width, height, alt, credit } = selectedGif;
 
+    const shuffleGifs = () => {
+        const min = 0;
+        const max = gifs.length - 1;
+        setSelectedGif(gifs[Math.floor(Math.random() * (max - min + 1)) + min]);
+    };
+
     useEffect(() => {
-        setSelectedGif(gifs[0]);
-    }, []);
+        if (!show) {
+            shuffleGifs();
+        }
+    }, [show]);
 
     return (
         <Grid container>
@@ -66,7 +88,7 @@ const Gif = ({ show }: Props) => {
                 })}
             >
                 {show ? (
-                    <Image alt={alt} src={source} width={width} height={height} />
+                    <Image alt={alt} layout="intrinsic" src={source} width={width} height={height} />
                 ) : (
                     <Paper square sx={{ width, height }} />
                 )}
@@ -75,7 +97,7 @@ const Gif = ({ show }: Props) => {
                 {show ? (
                     <Grid container justifyContent="flex-end">
                         <Link color="secondary" href={credit} target="_blank">
-                            Gif Source
+                            {alt} Source
                         </Link>
                     </Grid>
                 ) : (
