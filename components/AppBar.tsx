@@ -1,7 +1,7 @@
 import { GitHub, Settings as SettingsIcon } from '@mui/icons-material';
 import { AppBar as MuiAppBar, Toolbar, Typography, Tooltip, IconButton, Grid } from '@mui/material';
 import { useState } from 'react';
-import Settings from './Settings';
+import Settings from './settings/Settings';
 
 const AppBar = () => {
     const [openSettings, setOpenSettings] = useState(false);
