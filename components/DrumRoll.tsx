@@ -72,7 +72,7 @@ const DrumRoll = () => {
 
     return (
         <Container maxWidth="xs" sx={{ p: 4, height: '100%' }}>
-            <Box display="flex" sx={{ paddingTop: 8, height: '100%' }} alignItems="flex">
+            <Box display="flex" sx={{ height: '100%' }} alignItems="flex">
                 <Grid container justifyContent="center" spacing={spacing} sx={{ flexGrow: 1 }}>
                     <Grid item xs={12}>
                         <Typography

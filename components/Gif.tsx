@@ -18,8 +18,8 @@ const gifs: GifProps[] = [
     {
         credit: 'https://giphy.com/gifs/please-drumroll-ogGmxeqA8L3sA',
         source: 'https://media.giphy.com/media/ogGmxeqA8L3sA/giphy.gif',
-        width: 380,
-        height: 204,
+        width: 394,
+        height: 222,
         alt: 'Please GIF',
     },
     {
@@ -69,11 +69,11 @@ const Gif = ({ show }: Props) => {
         setSelectedGif(gifs[Math.floor(Math.random() * (max - min + 1)) + min]);
     };
 
-    useEffect(() => {
-        if (!show) {
-            shuffleGifs();
-        }
-    }, [show]);
+    // useEffect(() => {
+    //     if (!show) {
+    //         shuffleGifs();
+    //     }
+    // }, [show]);
 
     return (
         <Grid container>
@@ -90,7 +90,7 @@ const Gif = ({ show }: Props) => {
                 {show ? (
                     <Image alt={alt} layout="intrinsic" src={source} width={width} height={height} />
                 ) : (
-                    <Paper elevation={0} square sx={{ width, height }} />
+                    <Paper square sx={{ width, height }} />
                 )}
             </Grid>
             <Grid item xs={12} sx={{ paddingRight: 2, p: 2 }}>

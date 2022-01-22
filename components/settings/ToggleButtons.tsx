@@ -1,8 +1,8 @@
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { AppContext, localStorageKey } from 'providers/App';
+import useCustomLocalStorage from 'lib/hooks/useLocalStorage';
+import { AppContext } from 'providers/App';
 import { useContext } from 'react';
-import { useLocalStorage } from 'react-use';
 
 interface Duration {
     value: number;
@@ -30,17 +30,16 @@ const durations = [
 
 export default function ToggleButtons() {
     const { duration, setDuration } = useContext(AppContext);
-    const [localStorageValue, setLocalStorage] = useLocalStorage(localStorageKey, duration);
-
+    const { localStorageValue, setCustomStorage } = useCustomLocalStorage();
 
     const handleAlignment = (event, newAlignment) => {
         setDuration(newAlignment);
-        setLocalStorage(newAlignment);
+        setCustomStorage({ duration: newAlignment });
     };
 
     return (
         <ToggleButtonGroup
-            value={localStorageValue || duration}
+            value={localStorageValue?.duration || duration}
             exclusive
             onChange={handleAlignment}
             aria-label="Drum roll duration in seconds"
