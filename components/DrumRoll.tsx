@@ -114,7 +114,6 @@ const DrumRoll = () => {
                         </Grid>
                     </Grid>
                 </Grid>
-
             </Box>
         </Container>
     );
