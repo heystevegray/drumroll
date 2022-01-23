@@ -1,4 +1,4 @@
-import { Box, Container, useMediaQuery, useTheme } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import DrumRoll from 'components/DrumRoll';
 import Footer from 'components/Footer';
 import Head from 'next/head';
@@ -24,9 +24,7 @@ export default function Home() {
             </Head>
             <Box sx={{ height: `calc(100vh - ${totalAppBarHeight}px)` }}>
                 <AppBar />
-                <Box
-                    sx={{ height: '100%', mX: 2, justifyContent: 'center', alignItems: 'center' }}
-                >
+                <Box sx={{ height: '100%', mX: 2, justifyContent: 'center', alignItems: 'center' }}>
                     <DrumRoll />
                 </Box>
                 <Footer />

@@ -1,4 +1,4 @@
-import { Paper, Link, Grid, Typography } from '@mui/material';
+import { Paper, Link, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
@@ -60,8 +60,16 @@ const gifs: GifProps[] = [
 ];
 
 const Gif = ({ show }: Props) => {
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.down('sm'));
     const [selectedGif, setSelectedGif] = useState(gifs[0]);
     const { source, width, height, alt, credit } = selectedGif;
+    const mobileOffset = 2;
+    const maxGifHeight = 450;
+    let maxHeight = matches ? maxGifHeight / mobileOffset : maxGifHeight;
+    let gifWidth = matches ? width / mobileOffset : width;
+    let gifHeight = matches ? height / mobileOffset : height;
+    let drumSize = matches ? 50 : 100;
 
     const shuffleGifs = () => {
         const min = 0;
@@ -76,42 +84,48 @@ const Gif = ({ show }: Props) => {
     }, [show]);
 
     return (
-        <Grid container>
-            <Grid
-                container
-                alignItems="center"
-                justifyContent="center"
-                item
-                xs={12}
-                sx={(theme) => ({
-                    border: `2px solid ${theme.palette.primary.main}`,
-                })}
-            >
-                {show ? (
-                    <Image alt={alt} layout="intrinsic" src={source} width={width} height={height} />
-                ) : (
-                    <Paper square sx={{ width, height }}>
-                        <Grid container sx={{ height: '100%' }} alignItems="center" justifyContent="center">
+        <Grid container alignItems="center" justifyContent="center">
+            <Paper square sx={{ gifWidth, gifHeight }}>
+                <Grid
+                    container
+                    item
+                    xs={12}
+                    sx={(theme) => ({
+                        minHeight: matches ? maxHeight : undefined,
+                        border: `2px solid ${theme.palette.primary.main}`,
+                    })}
+                >
+                    {show ? (
+                        <Image alt={alt} src={source} width={gifWidth} height={gifHeight} />
+                    ) : (
+                        <Grid
+                            container
+                            sx={{ height: gifHeight, width: gifWidth }}
+                            alignItems="center"
+                            justifyContent="center"
+                        >
                             <Image
-                                width={100}
-                                height={100}
+                                width={drumSize}
+                                height={drumSize}
                                 layout="fixed"
                                 src="/android-chrome-192x192.png"
                                 alt="drum with drum sticks"
                             />
                         </Grid>
-                    </Paper>
-                )}
-            </Grid>
-            <Grid item xs={12} sx={{ paddingRight: 2, p: 2 }}>
+                    )}
+                </Grid>
+            </Paper>
+            <Grid item xs={12} sx={{ p: 2, maxWidth: gifWidth }} justifyContent="center">
                 {show ? (
                     <Grid container justifyContent="center">
-                        <Link color="secondary" href={credit} target="_blank">
+                        <Link color="secondary" textAlign="center" href={credit} target="_blank">
                             {alt} Source
                         </Link>
                     </Grid>
                 ) : (
-                    <Typography textAlign="center">Click Play to begin</Typography>
+                    <Typography color="textSecondary" textAlign="center">
+                        Click Play to begin
+                    </Typography>
                 )}
             </Grid>
         </Grid>
