@@ -155,25 +155,6 @@ const DrumRoll = () => {
         <Container maxWidth="xs" sx={{ p: 2, height: '100%' }}>
             <Grid
                 container
-                item
-                xs={12}
-                justifyContent="center"
-                alignItems="center"
-                sx={{ marginTop: isLargeScreen ? 10 : 0 }}
-            >
-                <Typography
-                    sx={{
-                        transform: `scale(${flip ? -1 : 1}, 1)`,
-                    }}
-                    variant="h2"
-                    textAlign="center"
-                    fontSize={fontSize}
-                >
-                    {emoji}
-                </Typography>
-            </Grid>
-            <Grid
-                container
                 spacing={defaultGridSpacing}
                 sx={{ height: isLargeScreen ? '80%' : '90%' }}
                 alignItems="flex-end"
@@ -187,7 +168,7 @@ const DrumRoll = () => {
                     spacing={defaultGridSpacing}
                 >
                     <Grid item xs={12} sx={{ height: '100%' }}>
-                        <Gif show={isRolling} />
+                        <Gif />
                     </Grid>
                 </Grid>
                 <Grid container item justifyContent="center" alignItems="center" spacing={defaultGridSpacing}>

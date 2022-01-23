@@ -1,11 +1,7 @@
 import { Paper, Link, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
-
-interface Props {
-    show: boolean;
-}
-
+import { AppContext } from 'providers/App';
+import { useState, useEffect, useContext } from 'react';
 interface GifProps {
     credit: string;
     source: string;
@@ -59,9 +55,10 @@ const gifs: GifProps[] = [
     },
 ];
 
-const Gif = ({ show }: Props) => {
+const Gif = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const { isRolling } = useContext(AppContext);
     const [selectedGif, setSelectedGif] = useState(gifs[0]);
     const { source, width, height, alt, credit } = selectedGif;
     const mobileOffset = 2;
@@ -78,10 +75,10 @@ const Gif = ({ show }: Props) => {
     };
 
     useEffect(() => {
-        if (!show) {
+        if (!isRolling) {
             shuffleGifs();
         }
-    }, [show]);
+    }, [isRolling]);
 
     return (
         <Grid container alignItems="center" justifyContent="center">
@@ -95,7 +92,7 @@ const Gif = ({ show }: Props) => {
                         border: `2px solid ${theme.palette.primary.main}`,
                     })}
                 >
-                    {show ? (
+                    {isRolling ? (
                         <Image alt={alt} src={source} width={gifWidth} height={gifHeight} />
                     ) : (
                         <Grid
@@ -122,7 +119,7 @@ const Gif = ({ show }: Props) => {
                 sx={{ p: 2, maxWidth: isMobile ? undefined : gifWidth }}
                 justifyContent="center"
             >
-                {show ? (
+                {isRolling ? (
                     <Grid container item xs={12} justifyContent="center">
                         <Link color="secondary" textAlign="center" href={credit} target="_blank">
                             {alt} Source
