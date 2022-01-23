@@ -129,7 +129,7 @@ const DrumRoll = () => {
     }, [endSound, loopSound, startSound]);
 
     return (
-        <Container maxWidth="xs" sx={{ p: 2, height: '100%' }}>
+        <Container maxWidth="xs" sx={{ height: '100%' }}>
             <Grid
                 container
                 spacing={defaultGridSpacing}
@@ -151,11 +151,12 @@ const DrumRoll = () => {
                 <Grid container item justifyContent="center" alignItems="center" spacing={defaultGridSpacing}>
                     <Grid
                         container
+                        item
                         spacing={defaultGridSpacing}
                         sx={{ marginBottom: isLargeScreen ? 4 : 0 }}
                         justifyContent="center"
                     >
-                        <Grid item xs={8} md={10}>
+                        <Grid container item md={10} justifyContent="center">
                             <Typography textAlign="center">{helperText}</Typography>
                         </Grid>
                         <Grid container item xs={12} justifyContent="center">
