@@ -115,17 +115,25 @@ const Gif = ({ show }: Props) => {
                     )}
                 </Grid>
             </Paper>
-            <Grid item xs={12} sx={{ p: 2, maxWidth: gifWidth }} justifyContent="center">
+            <Grid
+                container
+                item
+                xs={12}
+                sx={{ p: 2, maxWidth: isMobile ? undefined : gifWidth }}
+                justifyContent="center"
+            >
                 {show ? (
-                    <Grid container justifyContent="center">
+                    <Grid container item xs={12} justifyContent="center">
                         <Link color="secondary" textAlign="center" href={credit} target="_blank">
                             {alt} Source
                         </Link>
                     </Grid>
                 ) : (
-                    <Typography color="textSecondary" textAlign="center">
-                        Click Play to begin
-                    </Typography>
+                    <Grid item xs={12}>
+                        <Typography color="textSecondary" textAlign="center">
+                            Click Play to begin
+                        </Typography>
+                    </Grid>
                 )}
             </Grid>
         </Grid>
