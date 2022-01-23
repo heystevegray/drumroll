@@ -9,12 +9,17 @@ import { AppContext, initialAppState, initialUserSettingsState, UserSettings } f
 import useCustomLocalStorage from 'lib/hooks/useLocalStorage';
 
 const App = ({ Component, pageProps }: AppProps) => {
+    const [isRolling, setIsRolling] = useState(false);
+    const [openSettings, setOpenSettings] = useState(false);
+
+    // Use localStorageValue if it exists, otherwise use initialUserSettingsState
     const { localStorageValue } = useCustomLocalStorage();
     const [duration, setDuration] = useState<UserSettings['duration']>(
         localStorageValue?.duration || initialUserSettingsState.duration
     );
-    const [isRolling, setIsRolling] = useState(false);
-    const [openSettings, setOpenSettings] = useState(false);
+    const [showGifs, setShowGifs] = useState<UserSettings['showGifs']>(
+        localStorageValue?.showGifs || initialUserSettingsState.showGifs
+    );
 
     useEffect(() => {
         // Remove the server-side injected CSS.
@@ -22,9 +27,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         if (jssStyles) {
             jssStyles.parentElement?.removeChild(jssStyles);
         }
-    }, []);
 
-    useEffect(() => {
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
                 navigator.serviceWorker.register('/service-worker.js').then(
@@ -51,6 +54,8 @@ const App = ({ Component, pageProps }: AppProps) => {
                         setOpenSettings,
                         isRolling,
                         setIsRolling,
+                        showGifs,
+                        setShowGifs,
                     }}
                 >
                     {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

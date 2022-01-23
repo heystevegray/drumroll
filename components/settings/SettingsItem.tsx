@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material';
+import { Divider, Grid, Typography } from '@mui/material';
 import { AppContext } from 'providers/App';
 import { ReactElement, useContext } from 'react';
 
@@ -6,9 +6,10 @@ interface Props {
     component: ReactElement;
     text?: string;
     description?: string | ReactElement;
+    showDivider?: boolean;
 }
 
-const SettingsItem = ({ text, component, description = '' }: Props) => {
+const SettingsItem = ({ text, component, description = '', showDivider = false }: Props) => {
     const { defaultGridSpacing } = useContext(AppContext);
     return (
         <Grid container spacing={defaultGridSpacing}>
@@ -25,6 +26,11 @@ const SettingsItem = ({ text, component, description = '' }: Props) => {
             {description && (
                 <Grid item xs={12}>
                     <Typography color="textSecondary">{description}</Typography>
+                </Grid>
+            )}
+            {showDivider && (
+                <Grid item xs={12}>
+                    <Divider />
                 </Grid>
             )}
         </Grid>

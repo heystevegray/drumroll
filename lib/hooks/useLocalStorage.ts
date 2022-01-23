@@ -13,7 +13,7 @@ const useCustomLocalStorage = (): StorageProps => {
     );
 
     const setCustomStorage = (value: Partial<UserSettings>) => {
-        setLocalStorage({ ...localStorageValue, ...value });
+        setLocalStorage({ ...initialUserSettingsState, ...localStorageValue, ...value });
     };
 
     return { localStorageValue, setCustomStorage };

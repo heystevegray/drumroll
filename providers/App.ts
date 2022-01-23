@@ -2,21 +2,25 @@ import { createContext, Dispatch, SetStateAction } from 'react';
 
 interface AppProps {
     defaultGridSpacing: number;
-    duration: number | undefined;
-    setDuration: Dispatch<SetStateAction<number | undefined>>;
+    duration: number;
+    setDuration: Dispatch<SetStateAction<number>>;
     openSettings: boolean;
     setOpenSettings: Dispatch<SetStateAction<boolean>>;
     isRolling: boolean;
     setIsRolling: Dispatch<SetStateAction<boolean>>;
+    showGifs: boolean;
+    setShowGifs: Dispatch<SetStateAction<boolean>>;
 }
 
 export const infinityValue = -1;
 export interface UserSettings {
-    duration?: number;
+    duration: number;
+    showGifs: boolean;
 }
 
 export const initialUserSettingsState: UserSettings = {
     duration: infinityValue,
+    showGifs: false,
 };
 
 export const initialAppState: AppProps = {
@@ -27,6 +31,8 @@ export const initialAppState: AppProps = {
     setOpenSettings: () => {},
     isRolling: false,
     setIsRolling: () => {},
+    showGifs: initialUserSettingsState.showGifs || false,
+    setShowGifs: () => {},
 };
 
 export const localStorageKey = 'drumroll-settings';
