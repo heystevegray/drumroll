@@ -28,13 +28,23 @@ const DrumRoll = () => {
         };
     }, [volume]);
 
-    const startSound = new Howl({
-        src: [drumStart],
-        ...config,
-        onend: function () {
-            loopSound.play();
-        },
-    });
+    const loopSound = useCallback(() => {
+        return new Howl({
+            src: [drumLoop],
+            loop: true,
+            ...config,
+        });
+    }, [config]);
+
+    const startSound = useCallback(() => {
+        return new Howl({
+            src: [drumStart],
+            ...config,
+            onend: function () {
+                loopSound().play();
+            },
+        });
+    }, [config, loopSound]);
 
     const endSound = useCallback(() => {
         return new Howl({
@@ -42,12 +52,6 @@ const DrumRoll = () => {
             ...config,
         });
     }, [config]);
-
-    const loopSound = new Howl({
-        src: [drumLoop],
-        loop: true,
-        ...config,
-    });
 
     const handleDurationTimeout = () => {
         if (duration && duration > 0) {
@@ -64,7 +68,7 @@ const DrumRoll = () => {
     const playAudio = () => {
         setIsRolling(true);
         setEmoji(`👀`);
-        startSound.play();
+        startSound().play();
 
         handleDurationTimeout();
     };
@@ -136,6 +140,17 @@ const DrumRoll = () => {
             setHelperText(`Rolling for ${timer} seconds`);
         }
     }, [duration, isRolling, timer]);
+
+    useEffect(() => {
+        startSound().load();
+        loopSound().load();
+        endSound().load();
+        return () => {
+            startSound().unload();
+            loopSound().unload();
+            endSound().unload();
+        };
+    }, [endSound, loopSound, startSound]);
 
     return (
         <Container maxWidth="xs" sx={{ p: 2, height: '100%' }}>
