@@ -1,7 +1,8 @@
 import { PlayArrow, Stop } from '@mui/icons-material';
 import { Container, Box, Grid, Typography, Button } from '@mui/material';
 import { Howl, Howler } from 'howler';
-import { useEffect, useState, useCallback } from 'react';
+import { AppContext, infinityValue } from 'providers/App';
+import { useEffect, useState, useContext, useCallback } from 'react';
 import Gif from './Gif';
 
 const drumStart = 'drumroll-start.wav';
@@ -12,13 +13,19 @@ const spacing = 4;
 const defaultEmoji = `😐`;
 
 const DrumRoll = () => {
+    const { duration } = useContext(AppContext);
     const [isRolling, setIsRolling] = useState(false);
     const [emoji, setEmoji] = useState(defaultEmoji);
     const [flip, setFlip] = useState(false);
+    const [timer, setTimer] = useState(duration || 0);
+    const [helperText, setHelperText] = useState('');
+    const [rollInterval, setRollInterval] = useState<NodeJS.Timer | null>(null);
     const [volume] = useState(0.5);
-    const config = {
-        volume,
-    };
+    const config = useCallback(() => {
+        return {
+            volume,
+        };
+    }, [volume]);
 
     const startSound = new Howl({
         src: [drumStart],
@@ -28,10 +35,12 @@ const DrumRoll = () => {
         },
     });
 
-    const endSound = new Howl({
-        src: [drumEnd],
-        ...config,
-    });
+    const endSound = useCallback(() => {
+        return new Howl({
+            src: [drumEnd],
+            ...config,
+        });
+    }, [config]);
 
     const loopSound = new Howl({
         src: [drumLoop],
@@ -39,22 +48,56 @@ const DrumRoll = () => {
         ...config,
     });
 
+    const handleDurationTimeout = () => {
+        if (duration && duration > 0) {
+            // Start the countdown timer.
+            setTimer(duration);
+            setRollInterval(
+                setInterval(() => {
+                    setTimer((previousTime) => previousTime - 1);
+                }, 1000)
+            );
+        }
+    };
+
     const playAudio = () => {
         setIsRolling(true);
         setEmoji(`👀`);
         startSound.play();
+
+        handleDurationTimeout();
     };
 
-    const stopAudio = () => {
+    const reset = useCallback(() => {
+        setEmoji(defaultEmoji);
+        if (duration) {
+            // Reset the timer.
+            setTimer(duration);
+        }
+    }, [duration]);
+
+    const stopAudio = useCallback(() => {
+        // Stop the audio.
+        Howler.stop();
+
+        // Play the end sound
+        endSound().fade(volume, 1, 250).play();
+
+        setTimer(0);
         setIsRolling(false);
         setEmoji(`🎉`);
-        Howler.stop();
-        endSound.play();
-        endSound.fade(0.25, volume, 250);
+
+        // If the interval is set, clear it
+        if (rollInterval) {
+            clearInterval(rollInterval);
+            console.log(`Cleared interval ${rollInterval}`);
+        }
+
+        // Wait a bit then reset the UI
         setTimeout(() => {
-            setEmoji(defaultEmoji);
+            reset();
         }, 2000);
-    };
+    }, [rollInterval, endSound, volume, reset]);
 
     const handleFlip = useCallback(() => {
         if (isRolling) {
@@ -69,6 +112,24 @@ const DrumRoll = () => {
         }
         return () => clearInterval(timerId);
     }, [isRolling, handleFlip]);
+
+    useEffect(() => {
+        if (timer === 0) {
+            if (isRolling) {
+                console.log('Stopping audio in useEffect....');
+                stopAudio();
+                setRollInterval(null);
+            }
+        }
+    }, [duration, isRolling, rollInterval, stopAudio, timer]);
+
+    useEffect(() => {
+        if (duration === infinityValue) {
+            setHelperText(`Duration set to infinite. Let the good times roll.`);
+        } else {
+            setHelperText(`Rolling for ${timer} seconds`);
+        }
+    }, [duration, timer]);
 
     return (
         <Container maxWidth="xs" sx={{ p: 4, height: '100%' }}>
@@ -90,6 +151,11 @@ const DrumRoll = () => {
                         <Gif show={isRolling} />
                     </Grid>
                     <Grid container item xs={12} spacing={2} alignItems="flex-end">
+                        <Grid item xs={12}>
+                            <Typography color="textSecondary" textAlign="center">
+                                {helperText}
+                            </Typography>
+                        </Grid>
                         <Grid container item xs={6} justifyContent="center">
                             <Button
                                 disabled={isRolling}

@@ -7,16 +7,17 @@ interface AppProps {
     setOpenSettings: Dispatch<SetStateAction<boolean>>;
 }
 
+export const infinityValue = -1;
 export interface UserSettings {
     duration?: number;
 }
 
 export const initialUserSettingsState: UserSettings = {
-    duration: -1,
+    duration: infinityValue,
 };
 
 export const initialState: AppProps = {
-    duration: initialUserSettingsState.duration || -1,
+    duration: initialUserSettingsState.duration || infinityValue,
     setDuration: () => {},
     openSettings: false,
     setOpenSettings: () => {},
