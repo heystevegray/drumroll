@@ -24,7 +24,7 @@ export default function Home() {
             </Head>
             <Box sx={{ height: `calc(100vh - ${totalAppBarHeight}px)` }}>
                 <AppBar />
-                <Box sx={{ height: '100%' }}>
+                <Box sx={{ height: '100%', mX: 2, justifyContent: 'center', alignItems: 'center' }}>
                     <DrumRoll />
                 </Box>
                 <Footer />

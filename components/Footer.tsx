@@ -5,11 +5,11 @@ const Footer = () => {
         <AppBar position="static" color="transparent">
             <Toolbar>
                 <Grid container justifyContent="center" alignItems="center">
-                    <Typography>
+                    <Typography textAlign="center">
                         Created by{' '}
                         <Link color="secondary" target="_blank" href="https://heystevegray.dev/">
                             Steve Gray
-                        </Link>{' '}
+                        </Link>
                     </Typography>
                 </Grid>
             </Toolbar>
