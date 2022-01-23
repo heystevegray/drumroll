@@ -1,20 +1,21 @@
 import Drawer from '@mui/material/Drawer';
 import { Typography, Grid, Container, IconButton, Checkbox, FormControlLabel, FormGroup } from '@mui/material';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import ToggleButtons from './ToggleButtons';
 import SettingsItem from './SettingsItem';
 import Header from './Header';
 import { Close } from '@mui/icons-material';
-import { AppContext } from 'providers/App';
-import useCustomLocalStorage from 'lib/hooks/useLocalStorage';
+import { AppContext, localStorageKeyGifs } from 'providers/App';
+import { useLocalStorage } from 'react-use';
 
 const Settings = () => {
     const { openSettings, setOpenSettings, defaultGridSpacing, showGifs, setShowGifs } = useContext(AppContext);
-    const { setCustomStorage } = useCustomLocalStorage();
+    const [_localStorageShowGifs, setLocalStorageShowGifs] = useLocalStorage(localStorageKeyGifs, showGifs);
 
     const handleUseGifs = () => {
-        setShowGifs(!showGifs);
-        setCustomStorage({ showGifs: !showGifs });
+        const newState = !showGifs;
+        setShowGifs(newState);
+        setLocalStorageShowGifs(newState);
     };
 
     const handleClose = () => setOpenSettings(false);
@@ -73,7 +74,13 @@ const Settings = () => {
                             component={
                                 <FormGroup>
                                     <FormControlLabel
-                                        control={<Checkbox value={showGifs} onClick={handleUseGifs} />}
+                                        control={
+                                            <Checkbox
+                                                checked={showGifs}
+                                                onChange={handleUseGifs}
+                                                inputProps={{ 'aria-label': 'controlled' }}
+                                            />
+                                        }
                                         label="Show GIFs"
                                     />
                                 </FormGroup>

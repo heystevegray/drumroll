@@ -35,6 +35,7 @@ export const initialAppState: AppProps = {
     setShowGifs: () => {},
 };
 
-export const localStorageKey = 'drumroll-settings';
+export const localStorageKeyGifs = 'drumroll-use-gifs';
+export const localStorageKeyDuration = 'drumroll-duration';
 
 export const AppContext = createContext<AppProps>(initialAppState);

@@ -1,8 +1,9 @@
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import useCustomLocalStorage from 'lib/hooks/useLocalStorage';
-import { AppContext, infinityValue } from 'providers/App';
+import { AppContext, infinityValue, localStorageKeyDuration } from 'providers/App';
 import { useContext, MouseEvent } from 'react';
+import { useLocalStorage } from 'react-use';
 
 interface Duration {
     value: number;
@@ -30,17 +31,17 @@ const durations: Duration[] = [
 
 export default function ToggleButtons() {
     const { duration, setDuration, isRolling } = useContext(AppContext);
-    const { localStorageValue, setCustomStorage } = useCustomLocalStorage();
+    const [localStorageDuration, setLocalStorageDuration] = useLocalStorage(localStorageKeyDuration, duration);
 
     const handleDuration = (_event: MouseEvent<HTMLElement>, value: number) => {
         const newDuration = value ? value : infinityValue;
         setDuration(newDuration);
-        setCustomStorage({ duration: newDuration });
+        setLocalStorageDuration(newDuration);
     };
 
     return (
         <ToggleButtonGroup
-            value={localStorageValue?.duration || duration}
+            value={localStorageDuration}
             exclusive
             disabled={isRolling}
             onChange={handleDuration}

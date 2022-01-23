@@ -5,20 +5,29 @@ import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 
 import theme from '../lib/theme';
-import { AppContext, initialAppState, initialUserSettingsState, UserSettings } from 'providers/App';
-import useCustomLocalStorage from 'lib/hooks/useLocalStorage';
+import {
+    AppContext,
+    initialAppState,
+    initialUserSettingsState,
+    localStorageKeyDuration,
+    localStorageKeyGifs,
+    UserSettings,
+} from 'providers/App';
+import { useLocalStorage } from 'react-use';
 
 const App = ({ Component, pageProps }: AppProps) => {
     const [isRolling, setIsRolling] = useState(false);
     const [openSettings, setOpenSettings] = useState(false);
 
     // Use localStorageValue if it exists, otherwise use initialUserSettingsState
-    const { localStorageValue } = useCustomLocalStorage();
+    const [durationInitialState] = useLocalStorage(localStorageKeyDuration, initialUserSettingsState.duration);
     const [duration, setDuration] = useState<UserSettings['duration']>(
-        localStorageValue?.duration || initialUserSettingsState.duration
+        durationInitialState || initialUserSettingsState.duration
     );
+
+    const [showGifInitialState] = useLocalStorage(localStorageKeyGifs, initialUserSettingsState.showGifs);
     const [showGifs, setShowGifs] = useState<UserSettings['showGifs']>(
-        localStorageValue?.showGifs || initialUserSettingsState.showGifs
+        showGifInitialState || initialUserSettingsState.showGifs
     );
 
     useEffect(() => {
