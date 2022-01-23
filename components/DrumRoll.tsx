@@ -111,7 +111,7 @@ const DrumRoll = () => {
         }
 
         if (duration === infinityValue) {
-            setHelperText(`Drumroll duration set to infinite. Configure below or let the good times roll.`);
+            setHelperText(`Drumroll duration set to infinite. Configure the settings below or let the good times roll.`);
         } else {
             setHelperText(`Rolling for ${timer} seconds`);
         }
@@ -155,7 +155,7 @@ const DrumRoll = () => {
                         sx={{ marginBottom: isLargeScreen ? 4 : 0 }}
                         justifyContent="center"
                     >
-                        <Grid item xs={9}>
+                        <Grid item xs={8} md={10}>
                             <Typography textAlign="center">{helperText}</Typography>
                         </Grid>
                         <Grid container item xs={12} justifyContent="center">

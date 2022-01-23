@@ -86,6 +86,7 @@ const Gif = () => {
                 <Grid
                     container
                     item
+                    justifyContent="center"
                     xs={12}
                     sx={(theme) => ({
                         minHeight: isMobile ? maxHeight : undefined,
@@ -116,7 +117,7 @@ const Gif = () => {
                 container
                 item
                 xs={12}
-                sx={{ p: 2, maxWidth: isMobile ? undefined : gifWidth }}
+                sx={{ p: 2 }}
                 justifyContent="center"
             >
                 {isRolling ? (
