@@ -90,7 +90,17 @@ const Gif = ({ show }: Props) => {
                 {show ? (
                     <Image alt={alt} layout="intrinsic" src={source} width={width} height={height} />
                 ) : (
-                    <Paper square sx={{ width, height }} />
+                    <Paper square sx={{ width, height }}>
+                        <Grid container sx={{ height: '100%' }} alignItems="center" justifyContent="center">
+                            <Image
+                                width={100}
+                                height={100}
+                                layout="fixed"
+                                src="/android-chrome-192x192.png"
+                                alt="drum with drum sticks"
+                            />
+                        </Grid>
+                    </Paper>
                 )}
             </Grid>
             <Grid item xs={12} sx={{ paddingRight: 2, p: 2 }}>
