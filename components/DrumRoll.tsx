@@ -9,11 +9,10 @@ const drumStart = 'drumroll-start.wav';
 const drumLoop = 'drumroll-loop.wav';
 const drumEnd = 'drumroll-end.wav';
 const fontSize = '4rem';
-const spacing = 4;
 const defaultEmoji = `😐`;
 
 const DrumRoll = () => {
-    const { duration } = useContext(AppContext);
+    const { duration, setOpenSettings, defaultGridSpacing } = useContext(AppContext);
     const [isRolling, setIsRolling] = useState(false);
     const [emoji, setEmoji] = useState(defaultEmoji);
     const [flip, setFlip] = useState(false);
@@ -124,38 +123,48 @@ const DrumRoll = () => {
     }, [duration, isRolling, rollInterval, stopAudio, timer]);
 
     useEffect(() => {
+        // Reset the duration if the settings change
+        if (!isRolling && duration && timer !== duration) {
+            setTimer(duration);
+        }
+
         if (duration === infinityValue) {
             setHelperText(`Duration set to infinite. Let the good times roll.`);
         } else {
             setHelperText(`Rolling for ${timer} seconds`);
         }
-    }, [duration, timer]);
+    }, [duration, isRolling, timer]);
 
     return (
-        <Container maxWidth="xs" sx={{ p: 4, height: '100%' }}>
-            <Box display="flex" sx={{ height: '100%' }} alignItems="flex">
-                <Grid container justifyContent="center" spacing={spacing} sx={{ flexGrow: 1 }}>
-                    <Grid item xs={12}>
-                        <Typography
-                            sx={{
-                                transform: `scale(${flip ? -1 : 1}, 1)`,
-                            }}
-                            variant="h2"
-                            textAlign="center"
-                            fontSize={fontSize}
-                        >
-                            {emoji}
-                        </Typography>
-                    </Grid>
-                    <Grid container item xs={12} alignItems="center" justifyContent="center" sx={{ flexGrow: 1 }}>
-                        <Gif show={isRolling} />
-                    </Grid>
-                    <Grid container item xs={12} spacing={2} alignItems="flex-end">
-                        <Grid item xs={12}>
+        <Container maxWidth="xs" sx={{ p: 2, justifyContent: 'center', display: 'flex' }}>
+            <Grid container spacing={defaultGridSpacing} sx={{ height: '100%' }}>
+                <Grid container item xs={12} justifyContent="center" alignItems="center" sx={{ marginTop: 4 }}>
+                    <Typography
+                        sx={{
+                            transform: `scale(${flip ? -1 : 1}, 1)`,
+                        }}
+                        variant="h2"
+                        textAlign="center"
+                        fontSize={fontSize}
+                    >
+                        {emoji}
+                    </Typography>
+                </Grid>
+                <Grid container item xs={12} alignItems="center" justifyContent="center">
+                    <Gif show={isRolling} />
+                </Grid>
+                <Grid container item spacing={6} justifyContent="center">
+                    <Grid container item xs={12}>
+                        <Grid item xs>
                             <Typography color="textSecondary" textAlign="center">
                                 {helperText}
                             </Typography>
                         </Grid>
+                        <Grid container item xs={12} justifyContent="center">
+                            <Button color="secondary" onClick={() => setOpenSettings(true)}>Configure</Button>
+                        </Grid>
+                    </Grid>
+                    <Grid container item xs={12} spacing={defaultGridSpacing} alignItems="flex-end">
                         <Grid container item xs={6} justifyContent="center">
                             <Button
                                 disabled={isRolling}
@@ -180,7 +189,7 @@ const DrumRoll = () => {
                         </Grid>
                     </Grid>
                 </Grid>
-            </Box>
+            </Grid>
         </Container>
     );
 };

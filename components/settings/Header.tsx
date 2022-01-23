@@ -1,12 +1,15 @@
 import { Grid, Typography, Divider } from '@mui/material';
+import { AppContext } from 'providers/App';
+import { useContext } from 'react';
 
 interface Props {
     text: string;
 }
 
 const Header = ({ text }: Props) => {
+    const { defaultGridSpacing } = useContext(AppContext);
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={defaultGridSpacing}>
             <Grid item xs={12}>
                 <Divider />
             </Grid>

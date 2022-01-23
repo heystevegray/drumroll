@@ -1,5 +1,6 @@
 import { Grid, Typography } from '@mui/material';
-import { ReactElement } from 'react';
+import { AppContext } from 'providers/App';
+import { ReactElement, useContext } from 'react';
 
 interface Props {
     component: ReactElement;
@@ -8,8 +9,9 @@ interface Props {
 }
 
 const SettingsItem = ({ text, component, description = '' }: Props) => {
+    const { defaultGridSpacing } = useContext(AppContext);
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={defaultGridSpacing}>
             {text && (
                 <Grid item xs={12}>
                     <Typography color="textSecondary" variant="h6" component="h4">

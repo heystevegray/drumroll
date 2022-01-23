@@ -1,23 +1,20 @@
 import Drawer from '@mui/material/Drawer';
 import { Typography, Grid, Container, IconButton } from '@mui/material';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useContext } from 'react';
 import ToggleButtons from './ToggleButtons';
 import SettingsItem from './SettingsItem';
 import Header from './Header';
 import { Close } from '@mui/icons-material';
+import { AppContext } from 'providers/App';
 
-interface Props {
-    open: boolean;
-    setOpen: Dispatch<SetStateAction<boolean>>;
-}
-
-const Settings = ({ open, setOpen }: Props) => {
-    const handleClose = () => setOpen(false);
+const Settings = () => {
+    const { openSettings, setOpenSettings, defaultGridSpacing } = useContext(AppContext);
+    const handleClose = () => setOpenSettings(false);
 
     return (
-        <Drawer elevation={2} anchor="right" open={open} onClose={handleClose}>
+        <Drawer elevation={2} anchor="right" open={openSettings} onClose={handleClose}>
             <Container maxWidth="xs" sx={{ p: 2, height: '100%' }}>
-                <Grid container spacing={2}>
+                <Grid container spacing={defaultGridSpacing}>
                     <Grid container item xs={12}>
                         <Grid item xs>
                             <Typography variant="h4" component="h2">
@@ -37,7 +34,7 @@ const Settings = ({ open, setOpen }: Props) => {
                         <SettingsItem
                             text="Default drumroll duration"
                             description={
-                                <Grid container spacing={2}>
+                                <Grid container spacing={defaultGridSpacing}>
                                     <Grid item xs={12}>
                                         <Typography>
                                             Sets the default drumroll duration in seconds. If Infinite is selected, you
