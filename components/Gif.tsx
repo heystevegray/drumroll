@@ -61,15 +61,15 @@ const gifs: GifProps[] = [
 
 const Gif = ({ show }: Props) => {
     const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.down('sm'));
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const [selectedGif, setSelectedGif] = useState(gifs[0]);
     const { source, width, height, alt, credit } = selectedGif;
     const mobileOffset = 2;
     const maxGifHeight = 450;
-    let maxHeight = matches ? maxGifHeight / mobileOffset : maxGifHeight;
-    let gifWidth = matches ? width / mobileOffset : width;
-    let gifHeight = matches ? height / mobileOffset : height;
-    let drumSize = matches ? 50 : 100;
+    let maxHeight = isMobile ? maxGifHeight / mobileOffset : maxGifHeight;
+    let gifWidth = isMobile ? width / mobileOffset : width;
+    let gifHeight = isMobile ? height / mobileOffset : height;
+    let drumSize = isMobile ? 50 : 100;
 
     const shuffleGifs = () => {
         const min = 0;
@@ -91,7 +91,7 @@ const Gif = ({ show }: Props) => {
                     item
                     xs={12}
                     sx={(theme) => ({
-                        minHeight: matches ? maxHeight : undefined,
+                        minHeight: isMobile ? maxHeight : undefined,
                         border: `2px solid ${theme.palette.primary.main}`,
                     })}
                 >
@@ -100,7 +100,7 @@ const Gif = ({ show }: Props) => {
                     ) : (
                         <Grid
                             container
-                            sx={{ height: gifHeight, width: gifWidth }}
+                            sx={{ height: isMobile ? undefined : gifHeight, width: gifWidth }}
                             alignItems="center"
                             justifyContent="center"
                         >
