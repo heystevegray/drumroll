@@ -73,13 +73,7 @@ const Settings = () => {
                             component={
                                 <FormGroup>
                                     <FormControlLabel
-                                        control={
-                                            <Checkbox
-                                                defaultChecked={showGifs}
-                                                value={showGifs}
-                                                onClick={handleUseGifs}
-                                            />
-                                        }
+                                        control={<Checkbox value={showGifs} onClick={handleUseGifs} />}
                                         label="Show GIFs"
                                     />
                                 </FormGroup>
