@@ -66,27 +66,6 @@ const Settings = () => {
                             }
                         />
                     </Grid>
-                    <Grid item xs={12}>
-                        <SettingsItem
-                            showDivider
-                            text="Show GIFs"
-                            description="Shows a random GIF when the drums are rolling. If disabled, you will see the basic user interface."
-                            component={
-                                <FormGroup>
-                                    <FormControlLabel
-                                        control={
-                                            <Checkbox
-                                                checked={showGifs}
-                                                onChange={handleUseGifs}
-                                                inputProps={{ 'aria-label': 'controlled' }}
-                                            />
-                                        }
-                                        label="Show GIFs"
-                                    />
-                                </FormGroup>
-                            }
-                        />
-                    </Grid>
                 </Grid>
             </Container>
         </Drawer>
