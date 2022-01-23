@@ -1,6 +1,5 @@
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import useCustomLocalStorage from 'lib/hooks/useLocalStorage';
 import { AppContext, infinityValue, localStorageKeyDuration } from 'providers/App';
 import { useContext, MouseEvent } from 'react';
 import { useLocalStorage } from 'react-use';
