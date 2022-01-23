@@ -1,6 +1,6 @@
 import Drawer from '@mui/material/Drawer';
 import { Typography, Grid, Container, IconButton } from '@mui/material';
-import { Dispatch, SetStateAction, useContext } from 'react';
+import { useContext } from 'react';
 import ToggleButtons from './ToggleButtons';
 import SettingsItem from './SettingsItem';
 import Header from './Header';

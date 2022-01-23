@@ -1,5 +1,5 @@
 import { PlayArrow, Stop } from '@mui/icons-material';
-import { Container, Box, Grid, Typography, Button, useTheme, useMediaQuery } from '@mui/material';
+import { Container, Grid, Typography, Button, useTheme, useMediaQuery } from '@mui/material';
 import { Howl, Howler } from 'howler';
 import { AppContext, infinityValue } from 'providers/App';
 import { useEffect, useState, useContext, useCallback } from 'react';
