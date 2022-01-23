@@ -6,30 +6,36 @@ import { AppContext } from 'providers/App';
 const defaultEmoji = `😐`;
 
 const Basic = () => {
-	const { isRolling, setIsRolling, defaultGridSpacing } = useContext(AppContext);
+	const { isRolling, defaultGridSpacing } = useContext(AppContext);
 	const [emoji, setEmoji] = useState(defaultEmoji);
 	const [flip, setFlip] = useState(false);
 
 
 	const handleFlip = useCallback(() => {
 		if (isRolling) {
-			setEmoji(`👀`);
 			setFlip(!flip);
-		} else {
-			setEmoji(`🎉`);
-			setTimeout(() => {
-				setEmoji(defaultEmoji);
-			}, 2000);
 		}
 	}, [flip, isRolling]);
 
 	useEffect(() => {
 		const timerId = setInterval(handleFlip, 1500);
-		if (!isRolling) {
+
+		if (isRolling) {
+			setEmoji(`👀`);
+		} else {
+			setEmoji(`🎉`);
+			setTimeout(() => {
+				setEmoji(defaultEmoji);
+			}, 2000);
 			clearInterval(timerId);
 		}
+
 		return () => clearInterval(timerId);
 	}, [isRolling, handleFlip]);
+
+	useEffect(() => {
+		setEmoji(defaultEmoji)
+	}, []);
 
 	return (
 		<Container maxWidth="xs" sx={{ p: 4 }}>
