@@ -29,7 +29,7 @@ const durations: Duration[] = [
 ];
 
 export default function ToggleButtons() {
-    const { duration, setDuration } = useContext(AppContext);
+    const { duration, setDuration, isRolling } = useContext(AppContext);
     const { localStorageValue, setCustomStorage } = useCustomLocalStorage();
 
     const handleDuration = (_event: MouseEvent<HTMLElement>, value: number) => {
@@ -42,6 +42,7 @@ export default function ToggleButtons() {
         <ToggleButtonGroup
             value={localStorageValue?.duration || duration}
             exclusive
+            disabled={isRolling}
             onChange={handleDuration}
             aria-label="Drum roll duration in seconds"
         >

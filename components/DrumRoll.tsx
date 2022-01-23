@@ -14,8 +14,7 @@ const defaultEmoji = `😐`;
 const DrumRoll = () => {
     const theme = useTheme();
     const isLargeScreen = useMediaQuery(theme.breakpoints.up('sm'));
-    const { duration, setOpenSettings, defaultGridSpacing } = useContext(AppContext);
-    const [isRolling, setIsRolling] = useState(false);
+    const { duration, setOpenSettings, defaultGridSpacing, isRolling, setIsRolling } = useContext(AppContext);
     const [emoji, setEmoji] = useState(defaultEmoji);
     const [flip, setFlip] = useState(false);
     const [timer, setTimer] = useState(duration || 0);

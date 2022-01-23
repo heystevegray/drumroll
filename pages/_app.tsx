@@ -13,6 +13,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     const [duration, setDuration] = useState<UserSettings['duration']>(
         localStorageValue?.duration || initialUserSettingsState.duration
     );
+    const [isRolling, setIsRolling] = useState(false);
     const [openSettings, setOpenSettings] = useState(false);
 
     useEffect(() => {
@@ -48,6 +49,8 @@ const App = ({ Component, pageProps }: AppProps) => {
                         setDuration,
                         openSettings,
                         setOpenSettings,
+                        isRolling,
+                        setIsRolling,
                     }}
                 >
                     {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

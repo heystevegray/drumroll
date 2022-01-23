@@ -6,6 +6,8 @@ interface AppProps {
     setDuration: Dispatch<SetStateAction<number | undefined>>;
     openSettings: boolean;
     setOpenSettings: Dispatch<SetStateAction<boolean>>;
+    isRolling: boolean;
+    setIsRolling: Dispatch<SetStateAction<boolean>>;
 }
 
 export const infinityValue = -1;
@@ -23,6 +25,8 @@ export const initialAppState: AppProps = {
     setDuration: () => {},
     openSettings: false,
     setOpenSettings: () => {},
+    isRolling: false,
+    setIsRolling: () => {},
 };
 
 export const localStorageKey = 'drumroll-settings';
