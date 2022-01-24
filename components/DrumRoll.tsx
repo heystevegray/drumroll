@@ -4,7 +4,6 @@ import { Howl, Howler } from 'howler';
 import { AppContext, infinityValue } from 'providers/App';
 import { useEffect, useState, useContext, useCallback } from 'react';
 import Basic from './Basic';
-import Gif from './Gif';
 
 const drumStart = 'drumroll-start.wav';
 const drumLoop = 'drumroll-loop.wav';
@@ -13,7 +12,7 @@ const drumEnd = 'drumroll-end.wav';
 const DrumRoll = () => {
     const theme = useTheme();
     const isLargeScreen = useMediaQuery(theme.breakpoints.up('sm'));
-    const { duration, setOpenSettings, defaultGridSpacing, isRolling, setIsRolling, showGifs } = useContext(AppContext);
+    const { duration, setOpenSettings, defaultGridSpacing, isRolling, setIsRolling } = useContext(AppContext);
     const [timer, setTimer] = useState(duration || 0);
     const [helperText, setHelperText] = useState('');
     const [rollInterval, setRollInterval] = useState<NodeJS.Timer | null>(null);
@@ -145,7 +144,7 @@ const DrumRoll = () => {
                     spacing={defaultGridSpacing}
                 >
                     <Grid item xs={12} sx={{ height: '100%' }}>
-                        {showGifs ? <Gif /> : <Basic />}
+                        <Basic />
                     </Grid>
                 </Grid>
                 <Grid container item justifyContent="center" alignItems="center" spacing={defaultGridSpacing}>

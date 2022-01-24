@@ -10,7 +10,6 @@ import {
     initialAppState,
     initialUserSettingsState,
     localStorageKeyDuration,
-    localStorageKeyGifs,
     UserSettings,
 } from 'providers/App';
 import { useLocalStorage } from 'react-use';
@@ -23,11 +22,6 @@ const App = ({ Component, pageProps }: AppProps) => {
     const [durationInitialState] = useLocalStorage(localStorageKeyDuration, initialUserSettingsState.duration);
     const [duration, setDuration] = useState<UserSettings['duration']>(
         durationInitialState || initialUserSettingsState.duration
-    );
-
-    const [showGifInitialState] = useLocalStorage(localStorageKeyGifs, initialUserSettingsState.showGifs);
-    const [showGifs, setShowGifs] = useState<UserSettings['showGifs']>(
-        showGifInitialState || initialUserSettingsState.showGifs
     );
 
     useEffect(() => {
@@ -63,8 +57,6 @@ const App = ({ Component, pageProps }: AppProps) => {
                         setOpenSettings,
                         isRolling,
                         setIsRolling,
-                        showGifs,
-                        setShowGifs,
                     }}
                 >
                     {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

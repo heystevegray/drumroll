@@ -8,19 +8,16 @@ interface AppProps {
     setOpenSettings: Dispatch<SetStateAction<boolean>>;
     isRolling: boolean;
     setIsRolling: Dispatch<SetStateAction<boolean>>;
-    showGifs: boolean;
-    setShowGifs: Dispatch<SetStateAction<boolean>>;
+   
 }
 
 export const infinityValue = -1;
 export interface UserSettings {
     duration: number;
-    showGifs: boolean;
 }
 
 export const initialUserSettingsState: UserSettings = {
     duration: infinityValue,
-    showGifs: false,
 };
 
 export const initialAppState: AppProps = {
@@ -31,8 +28,6 @@ export const initialAppState: AppProps = {
     setOpenSettings: () => {},
     isRolling: false,
     setIsRolling: () => {},
-    showGifs: initialUserSettingsState.showGifs || false,
-    setShowGifs: () => {},
 };
 
 export const localStorageKeyGifs = 'drumroll-use-gifs';
