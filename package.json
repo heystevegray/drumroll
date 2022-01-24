@@ -1,5 +1,5 @@
 {
-    "name": "virturoll",
+    "name": "drumroll",
     "private": true,
     "scripts": {
         "dev": "next dev",

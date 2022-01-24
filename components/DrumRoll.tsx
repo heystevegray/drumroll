@@ -110,7 +110,9 @@ const DrumRoll = () => {
         }
 
         if (duration === infinityValue) {
-            setHelperText(`Drumroll duration set to infinite. Configure the settings below or let the good times roll.`);
+            setHelperText(
+                `Drumroll duration set to Infinite. Configure the settings below or let the good times roll.`
+            );
         } else {
             setHelperText(`Rolling for ${timer} seconds`);
         }

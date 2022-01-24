@@ -8,7 +8,6 @@ interface AppProps {
     setOpenSettings: Dispatch<SetStateAction<boolean>>;
     isRolling: boolean;
     setIsRolling: Dispatch<SetStateAction<boolean>>;
-   
 }
 
 export const infinityValue = -1;

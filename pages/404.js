@@ -1,6 +1,6 @@
 import { Container, Typography, Grid } from '@mui/material';
-import Link from 'next/link';
 import Head from 'next/head';
+import Link from 'components/Link';
 
 const Custom404 = () => {
     return (
@@ -27,7 +27,7 @@ const Custom404 = () => {
                     </Typography>
                 </Grid>
                 <Grid container item xs={12} justifyContent="center">
-                    <Link href="/">Go Back</Link>
+                    <Link href="/" color="secondary" label='Go Back' />
                 </Grid>
             </Grid>
         </Container>

@@ -113,13 +113,7 @@ const Gif = () => {
                     )}
                 </Grid>
             </Paper>
-            <Grid
-                container
-                item
-                xs={12}
-                sx={{ p: 2 }}
-                justifyContent="center"
-            >
+            <Grid container item xs={12} sx={{ p: 2 }} justifyContent="center">
                 {isRolling ? (
                     <Grid container item xs={12} justifyContent="center">
                         <Link color="secondary" textAlign="center" href={credit} target="_blank">
