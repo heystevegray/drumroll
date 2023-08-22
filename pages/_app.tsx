@@ -1,8 +1,9 @@
 import '../styles/globals.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { AppProps } from 'next/app';
 import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
+import { Analytics } from '@vercel/analytics/react';
 
 import theme from '../lib/theme';
 import {
@@ -14,6 +15,8 @@ import {
 } from 'providers/App';
 import { useLocalStorage } from 'react-use';
 
+export const isDevelopmentEnvironment = () => process?.env?.NODE_ENV === 'development';
+
 const App = ({ Component, pageProps }: AppProps) => {
     const [isRolling, setIsRolling] = useState(false);
     const [openSettings, setOpenSettings] = useState(false);
@@ -22,6 +25,19 @@ const App = ({ Component, pageProps }: AppProps) => {
     const [durationInitialState] = useLocalStorage(localStorageKeyDuration, initialUserSettingsState.duration);
     const [duration, setDuration] = useState<UserSettings['duration']>(
         durationInitialState || initialUserSettingsState.duration
+    );
+
+    const memoAppState = useMemo(
+        () => ({
+            defaultGridSpacing: initialAppState.defaultGridSpacing,
+            duration,
+            setDuration,
+            openSettings,
+            setOpenSettings,
+            isRolling,
+            setIsRolling,
+        }),
+        [duration, isRolling, openSettings]
     );
 
     useEffect(() => {
@@ -48,20 +64,11 @@ const App = ({ Component, pageProps }: AppProps) => {
     return (
         <StyledEngineProvider injectFirst>
             <ThemeProvider theme={theme}>
-                <AppContext.Provider
-                    value={{
-                        defaultGridSpacing: initialAppState.defaultGridSpacing,
-                        duration,
-                        setDuration,
-                        openSettings,
-                        setOpenSettings,
-                        isRolling,
-                        setIsRolling,
-                    }}
-                >
+                <AppContext.Provider value={memoAppState}>
                     {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
                     <CssBaseline />
                     <Component {...pageProps} />
+                    {isDevelopmentEnvironment() ? null : <Analytics />}
                 </AppContext.Provider>
             </ThemeProvider>
         </StyledEngineProvider>
