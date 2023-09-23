@@ -1,4 +1,5 @@
 import { AppBar, Grid, Link, Toolbar, Typography } from '@mui/material';
+import { MY_WEBSITE_URL } from 'lib/config';
 
 const Footer = () => {
     return (
@@ -7,7 +8,7 @@ const Footer = () => {
                 <Grid container justifyContent="center" alignItems="center">
                     <Typography textAlign="center">
                         Created by{' '}
-                        <Link color="secondary" target="_blank" href="https://heystevegray.dev/">
+                        <Link color="secondary" target="_blank" href={MY_WEBSITE_URL}>
                             Steve Gray
                         </Link>
                     </Typography>
